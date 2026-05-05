@@ -1,8 +1,9 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
-
 package com.mycompany.attendgo;
+
+import object.karyawan;
 
 /**
  *
@@ -11,6 +12,12 @@ package com.mycompany.attendgo;
 public class AttendGo {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        karyawan KR = new karyawan();
+        if(KR instanceof karyawan){
+            System.err.println("Karyawan");
+        }else {
+            System.err.println("Something else");
+        }// //
+        // //
     }
 }

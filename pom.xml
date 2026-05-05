@@ -15,7 +15,8 @@
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
-            <version>5.0.0</version>
+            <version>5.5.1</version>
+            <type>jar</type>
         </dependency>
         <!-- Library Hardware RFID (Pertemuan 13) -->
         <dependency>
