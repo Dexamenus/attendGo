@@ -4,7 +4,7 @@
  */
 package com.mycompany.attendgo;
 
-import object.Karyawan;
+import object.Karyawan1;
 import services.KaryawanServices;
 
 /**
@@ -365,7 +365,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        Karyawan K = new Karyawan();
+        Karyawan1 K = new Karyawan1();
         K.setUidRfid(txtUID.getText());
         K.setIdKaryawan(txtKRID.getText()); 
         K.setNamaLengkap(txtname.getText());
@@ -383,7 +383,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        Karyawan K = new Karyawan();
+        Karyawan1 K = new Karyawan1();
         K.setUidRfid(txtUID.getText());
         K.setIdKaryawan(txtKRID.getText()); 
         K.setNamaLengkap(txtname.getText());

@@ -6,42 +6,34 @@ package object;
 
 /**
  *
- * @author ADVAN
+ * @author HP VICTUS
  */
-public class karyawan {
+public class Karyawan1 {
 
-    
     private String uidRfid;
     private String idKaryawan;
     private String namaLengkap;
     private String departemen;
     private String email;
-    private String alamat;
-    private int noTelpon;
     private String password;
     
-    public karyawan(String uidRfid, String idKaryawan, String namaLengkap, String departemen, String email, String alamat, int noTelpon, String password) {
+    public Karyawan1() {
+    }
+    
+    public Karyawan1(String uidRfid, String idKaryawan, String namaLengkap, String departemen, String email, String password) {
         this.uidRfid = uidRfid;
         this.idKaryawan = idKaryawan;
         this.namaLengkap = namaLengkap;
         this.departemen = departemen;
         this.email = email;
-        this.alamat = alamat;
-        this.noTelpon = noTelpon;
         this.password = password;
     }
-    
-    public karyawan(){
-        
-    }
-    
-
 
     @Override
     public String toString() {
-        return "karyawan{" + "uidRfid=" + uidRfid + ", idKaryawan=" + idKaryawan + ", namaLengkap=" + namaLengkap + ", departemen=" + departemen + ", email=" + email + ", alamat=" + alamat + ", noTelpon=" + noTelpon + ", password=" + password + '}';
+        return "Karyawan{" + "uidRfid=" + uidRfid + ", idKaryawan=" + idKaryawan + ", namaLengkap=" + namaLengkap + ", departemen=" + departemen + ", email=" + email + ", password=" + password + '}';
     }
-    
+
     public String getUidRfid() {
         return uidRfid;
     }
@@ -82,22 +74,6 @@ public class karyawan {
         this.email = email;
     }
 
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
-    }
-
-    public int getNoTelpon() {
-        return noTelpon;
-    }
-
-    public void setNoTelpon(int noTelpon) {
-        this.noTelpon = noTelpon;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -105,6 +81,5 @@ public class karyawan {
     public void setPassword(String password) {
         this.password = password;
     }
-
     
 }
