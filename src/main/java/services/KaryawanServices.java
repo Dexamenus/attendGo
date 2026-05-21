@@ -21,7 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import object.Karyawan1;
+import object.Karyawan;
 import org.bson.conversions.Bson;
 
 /**
@@ -30,12 +30,12 @@ import org.bson.conversions.Bson;
  */
 public class KaryawanServices {
 
-    // Inisialisasi GenericDAO khusus untuk entitas Karyawan1
-    // Menggunakan koleksi "karyawan" dan referensi Class Karyawan1 [3]
-    private final GenericDAO<Karyawan1> DAO;
+    // Inisialisasi GenericDAO khusus untuk entitas Karyawan
+    // Menggunakan koleksi "karyawan" dan referensi Class Karyawan [3]
+    private final GenericDAO<Karyawan> DAO;
 
     public KaryawanServices(){
-        this.DAO = new GenericDAO<>("Karyawan", Karyawan1.class);
+        this.DAO = new GenericDAO<>("Karyawan", Karyawan.class);
     }
 
     /**
@@ -43,12 +43,12 @@ public class KaryawanServices {
      *
      * @param karyawanBaru
      */
-    public void tambahKaryawan(Karyawan1 karyawanBaru) {
+    public void tambahKaryawan(Karyawan karyawanBaru) {
         DAO.save(karyawanBaru); // Memanggil insertOne melalui GenericDAO [3]
     }
 
     public void tambahKaryawan(String uidRfid, String idKaryawan, String namaLengkap, String departemen, String email, String password) {
-        Karyawan1 karyawanBaru = new Karyawan1(uidRfid, idKaryawan, namaLengkap, departemen, email, password);
+        Karyawan karyawanBaru = new Karyawan(uidRfid, idKaryawan, namaLengkap, departemen, email, password);
         DAO.save(karyawanBaru); // Memanggil insertOne melalui GenericDAO [3]
     }
 
@@ -56,9 +56,9 @@ public class KaryawanServices {
      * 2. READ (All): Fungsi untuk mengambil semua data karyawan [5], [6]
      */
     public void tampilkanDaftarKaryawan() {
-        List<Karyawan1> daftar = DAO.findAll();
+        List<Karyawan> daftar = DAO.findAll();
         System.out.println("--- Daftar Karyawan Bank ---");
-        for (Karyawan1 k : daftar) {
+        for (Karyawan k : daftar) {
             System.out.println(k.toString()); // Menggunakan format toString di sumber [7]
         }
     }
@@ -75,7 +75,7 @@ public class KaryawanServices {
         // key "null/kosong" = get all data
         // key "filled" = get specific data
 
-        List<Karyawan1> daftarKaryawan;
+        List<Karyawan> daftarKaryawan;
         if (key.isEmpty()) {
             //Mengambil data dari database menggunakan GenericDAO
             daftarKaryawan = DAO.findAll();
@@ -102,7 +102,7 @@ public class KaryawanServices {
 
         // 3. Iterasi data dan menambahkannya ke panel grid
         try {
-            for (Karyawan1 k : daftarKaryawan) {
+            for (Karyawan k : daftarKaryawan) {
                 // Membuat panel 'Card' (box orange) untuk 1 karyawan
                 // Layout 4 baris 1 kolom agar kolor berisi Nama,ID, Departemen, panel control 
                 JPanel cardPanel = new JPanel(new GridLayout(4, 1, 0, 0));
@@ -118,7 +118,7 @@ public class KaryawanServices {
                 JLabel lblNama = new JLabel("Nama: " + k.getNamaLengkap());
                 lblNama.setForeground(Color.WHITE);
 
-                // Membuat Label ID Karyawan1 & Set warna teks jadi Putih
+                // Membuat Label ID Karyawan & Set warna teks jadi Putih
                 JLabel lblIDK = new JLabel("ID Karyawan: " + k.getIdKaryawan());
                 lblIDK.setForeground(Color.WHITE);
 
@@ -205,18 +205,18 @@ public class KaryawanServices {
      * @param key
      * @return
      */
-    public List<Karyawan1> cariKaryawan(String key) {
+    public List<Karyawan> cariKaryawan(String key) {
         List<Bson> filters = new ArrayList<>();
-        // Get all fields from the Karyawan1 class
-        for (Field field : Karyawan1.class.getDeclaredFields()) {
+        // Get all fields from the Karyawan class
+        for (Field field : Karyawan.class.getDeclaredFields()) {
             // Skip the uidRfid field and non-string fields if necessary
             if (field.getName().equals("uidRfid")) {
                 continue;
             }
             filters.add(Filters.regex(field.getName(), key, "i"));
         }
-        // Search and return Karyawan1 objects directly
-        List<Karyawan1> results = DAO.findMany(Filters.or(filters));
+        // Search and return Karyawan objects directly
+        List<Karyawan> results = DAO.findMany(Filters.or(filters));
         return results;
     }
 
@@ -225,9 +225,9 @@ public class KaryawanServices {
      *
      * @param newK
      */
-    public void updateKaryawan(Karyawan1 newK) {
+    public void updateKaryawan(Karyawan newK) {
         Bson filter = Filters.eq("idKaryawan", newK.getIdKaryawan());
-        Karyawan1 k = DAO.findOne(filter);
+        Karyawan k = DAO.findOne(filter);
         if (k != null) {
             DAO.update(filter, newK);
             DashboardAdmin.showData("");

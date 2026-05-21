@@ -8,7 +8,7 @@ package object;
  *
  * @author HP VICTUS
  */
-public class Karyawan1 {
+public class Karyawan {
 
     private String uidRfid;
     private String idKaryawan;
@@ -17,10 +17,10 @@ public class Karyawan1 {
     private String email;
     private String password;
     
-    public Karyawan1() {
+    public Karyawan() {
     }
     
-    public Karyawan1(String uidRfid, String idKaryawan, String namaLengkap, String departemen, String email, String password) {
+    public Karyawan(String uidRfid, String idKaryawan, String namaLengkap, String departemen, String email, String password) {
         this.uidRfid = uidRfid;
         this.idKaryawan = idKaryawan;
         this.namaLengkap = namaLengkap;
