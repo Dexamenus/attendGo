@@ -3,7 +3,7 @@
  */
 package com.mycompany.attendgo;
 
-import object.karyawan;
+import object.Karyawan;
 
 /**
  *
@@ -12,11 +12,11 @@ import object.karyawan;
 public class AttendGo {
 
     public static void main(String[] args) {
-        karyawan KR = new karyawan();
-        if(KR instanceof karyawan){
+        Karyawan KR = new Karyawan();
+        if(KR instanceof Karyawan){
             System.err.println("Karyawan");
         }else {
-            System.err.println("Something else");
+            System.err.println("Something else");       
         }// //
         // //
     }
