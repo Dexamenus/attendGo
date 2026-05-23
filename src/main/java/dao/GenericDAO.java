@@ -26,7 +26,7 @@ public class GenericDAO<T> implements BaseDAO<T> {
 
     @Override
     public void save(T entity) {
-        collection.insertOne(entity);        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        collection.insertOne(entity);        
     }
 
     @Override

@@ -200,13 +200,15 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("ID Karyawan");
 
-        txtKRID.setText("jTextField2");
+        txtKRID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtKRIDActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Nama");
-
-        txtname.setText("jTextField3");
 
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -220,32 +222,28 @@ public class DashboardAdmin extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Password");
 
-        txtEmail.setText("jTextField5");
-
-        txtPass.setText("jTextField6");
-
-        jButton1.setText("jButton1");
+        jButton1.setText("R");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        btnSave.setText("jButton2");
+        btnSave.setText("S");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
 
-        btnUpdate.setText("jButton2");
+        btnUpdate.setText("U");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
             }
         });
 
-        txtDept.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtDept.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IT Support", "Software Engineering", "Operations", "Human Resources (HRD)", "Finance", "Accounting", "Marketing", "Sales", "Customer Service" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -335,6 +333,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
         jPanel7.add(jPanel2, java.awt.BorderLayout.PAGE_START);
 
+        jPanel8.setBackground(new java.awt.Color(204, 204, 204));
         jPanel8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jScrollPane1.setViewportView(jPanel8);
 
@@ -375,10 +374,12 @@ public class DashboardAdmin extends javax.swing.JFrame {
         KaryawanServices service = new KaryawanServices();
         service.tambahKaryawan(K);
         showData("");
+        refresAll();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        refresAll();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -399,6 +400,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         showData(txtCari.getText());
     }//GEN-LAST:event_txtCariActionPerformed
+
+    private void txtKRIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtKRIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtKRIDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -476,9 +481,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
         showData("");
         txtUID.setText("");
         txtKRID.setText("");
+        txtKRID.setEnabled(true);
         txtname.setText("");
+        txtEmail.setText("");
+        txtPass.setText("");
         txtDept.setSelectedIndex(0); 
         btnUpdate.setEnabled(false); 
         txtUID.requestFocus();
+        btnSave.setEnabled(true);
     }
 }
