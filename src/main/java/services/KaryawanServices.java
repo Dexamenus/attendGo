@@ -27,7 +27,7 @@ import org.bson.conversions.Bson;
 /**
  *
  * @author HP VICTUS
- */
+ *////saya menggunakan GenericDAO Karyawan sebagai penghubung antara aplikasi dengan database MongoDB.
 public class KaryawanServices {
 
     // Inisialisasi GenericDAO khusus untuk entitas Karyawan
@@ -42,7 +42,7 @@ public class KaryawanServices {
      * 1.CREATE: Fungsi untuk menyimpan data karyawan baru ke MongoDB [2], [3]
      *
      * @param karyawanBaru
-     */
+     *///digunakan untuk menambahkan data karyawan baru dari UID RFID-password
     public void tambahKaryawan(Karyawan karyawanBaru) {
         DAO.save(karyawanBaru); // Memanggil insertOne melalui GenericDAO [3]
     }
@@ -54,7 +54,7 @@ public class KaryawanServices {
 
     /**
      * 2. READ (All): Fungsi untuk mengambil semua data karyawan [5], [6]
-     */
+     *///Fungsi ini digunakan untuk menampilkan data karyawan ke tampilan GUI
     public void tampilkanDaftarKaryawan() {
         List<Karyawan> daftar = DAO.findAll();
         System.out.println("--- Daftar Karyawan Bank ---");
@@ -233,7 +233,7 @@ public class KaryawanServices {
             DashboardAdmin.showData("");
             JOptionPane.showMessageDialog(null, "Data berhasil diperbarui!");
         }
-    }
+    }///Sistem akan mencari data berdasarkan idKaryawan
 
     /**
      * 5.DELETE: Menghapus data karyawan dari database [5], [6]
@@ -246,4 +246,4 @@ public class KaryawanServices {
         DashboardAdmin.showData("");
         JOptionPane.showMessageDialog(null, "Data karyawan berhasil dihapus.");
     }
-}
+}///Fungsi ini digunakan untuk menghapus data karyawan berdasarkan ID karyawan
