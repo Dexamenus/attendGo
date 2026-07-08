@@ -1,11 +1,11 @@
-package object;
+package pallete;
 
 import java.awt.*;
 import javax.swing.JPanel;
 
-public class PanelRounded extends JPanel {
+public class RoundedPanel extends JPanel {
 
-    public PanelRounded() {
+    public RoundedPanel() {
         setOpaque(false);
     }
 
@@ -28,12 +28,6 @@ public class PanelRounded extends JPanel {
                 getHeight()-6,
                 30,
                 30);
-
-        // border hijau
-
-        g2.setStroke(new BasicStroke(5));
-
-        g2.setColor(new Color(76,175,80));
 
         g2.drawRoundRect(
                 3,

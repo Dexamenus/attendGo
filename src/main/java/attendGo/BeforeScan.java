@@ -4,7 +4,7 @@
  */
 package attendGo;
 
-import object.PanelBulat;
+import pallete.PanelBulat;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
@@ -121,7 +121,7 @@ private void tampilJam() {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jPanel3 = new object.PanelBulat();
+        jPanel3 = new pallete.PanelBulat();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();

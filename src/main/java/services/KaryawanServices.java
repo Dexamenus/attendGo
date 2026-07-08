@@ -141,7 +141,6 @@ public class KaryawanServices {
                         EditKaryawan.txtNama.setText(k.getNamaLengkap());
                         EditKaryawan.txtDept.setSelectedItem(k.getDepartemen());
                         EditKaryawan.txtEmail.setText(k.getEmail());
-                        EditKaryawan.txtPass.setText(k.getPassword());
                     }
                 });
                 JButton tombolDelete = new JButton("Delete");
@@ -232,8 +231,6 @@ public class KaryawanServices {
     }///Sistem akan mencari data berdasarkan idKaryawan
 
     /**
-     * 5.DELETE: Menghapus data karyawan dari database [5], [6]
-     *
      * @param idK
      */
     public void hapusKaryawan(String idK) {

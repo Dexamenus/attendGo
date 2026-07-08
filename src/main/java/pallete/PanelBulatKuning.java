@@ -1,9 +1,9 @@
-package object;
+package pallete;
 
 import java.awt.*;
 import javax.swing.JPanel;
 
-public class PanelBulatHijau extends JPanel {
+public class PanelBulatKuning extends JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
