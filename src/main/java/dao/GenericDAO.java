@@ -28,6 +28,7 @@ public class GenericDAO<T> implements BaseDAO<T> {
 
     @Override
     public void save(T entity) {
+        collection.insertOne(entity);
     }
 
     @Override
