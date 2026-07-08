@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import panel.Dashboard;
 import panel.DataKaryawan;
+import panel.LogAbsensi;
 
 /**
  *
