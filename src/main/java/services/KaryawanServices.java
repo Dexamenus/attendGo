@@ -4,8 +4,8 @@
  */
 package services;
 
+import Dialog.EditKaryawan;
 import com.mongodb.client.model.Filters;
-import com.mycompany.attendgo.DashboardAdmin;
 import dao.GenericDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,11 +23,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import object.Karyawan;
 import org.bson.conversions.Bson;
+import panel.DataKaryawan;
 
 /**
  *
  * @author HP VICTUS
- */
+ *////saya menggunakan GenericDAO Karyawan sebagai penghubung antara aplikasi dengan database MongoDB.
 public class KaryawanServices {
 
     // Inisialisasi GenericDAO khusus untuk entitas Karyawan
@@ -42,7 +43,7 @@ public class KaryawanServices {
      * 1.CREATE: Fungsi untuk menyimpan data karyawan baru ke MongoDB [2], [3]
      *
      * @param karyawanBaru
-     */
+     *///digunakan untuk menambahkan data karyawan baru dari UID RFID-password
     public void tambahKaryawan(Karyawan karyawanBaru) {
         DAO.save(karyawanBaru); // Memanggil insertOne melalui GenericDAO [3]
     }
@@ -54,7 +55,7 @@ public class KaryawanServices {
 
     /**
      * 2. READ (All): Fungsi untuk mengambil semua data karyawan [5], [6]
-     */
+     *///Fungsi ini digunakan untuk menampilkan data karyawan ke tampilan GUI
     public void tampilkanDaftarKaryawan() {
         List<Karyawan> daftar = DAO.findAll();
         System.out.println("--- Daftar Karyawan Bank ---");
@@ -134,15 +135,13 @@ public class KaryawanServices {
                 tombolEdit.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        DashboardAdmin.txtUID.setText(k.getUidRfid());
-                        DashboardAdmin.txtKRID.setText(k.getIdKaryawan());
-                        DashboardAdmin.txtKRID.setEnabled(false);
-                        DashboardAdmin.txtname.setText(k.getNamaLengkap());
-                        DashboardAdmin.txtDept.setSelectedItem(k.getDepartemen());
-                        DashboardAdmin.txtEmail.setText(k.getEmail());
-                        DashboardAdmin.txtPass.setText(k.getPassword());
-                        DashboardAdmin.btnUpdate.setEnabled(true);
-                        DashboardAdmin.btnSave.setEnabled(false);
+                        EditKaryawan.txtUID.setText(k.getUidRfid());
+                        EditKaryawan.txtKRID.setText(k.getIdKaryawan());
+                        EditKaryawan.txtKRID.setEnabled(false);
+                        EditKaryawan.txtNama.setText(k.getNamaLengkap());
+                        EditKaryawan.txtDept.setSelectedItem(k.getDepartemen());
+                        EditKaryawan.txtEmail.setText(k.getEmail());
+                        EditKaryawan.txtPass.setText(k.getPassword());
                     }
                 });
                 JButton tombolDelete = new JButton("Delete");
@@ -227,10 +226,10 @@ public class KaryawanServices {
         Karyawan k = DAO.findOne(filter);
         if (k != null) {
             DAO.update(filter, newK);
-            DashboardAdmin.showData("");
+            DataKaryawan.showData("");
             JOptionPane.showMessageDialog(null, "Data berhasil diperbarui!");
         }
-    }
+    }///Sistem akan mencari data berdasarkan idKaryawan
 
     /**
      * 5.DELETE: Menghapus data karyawan dari database [5], [6]
@@ -240,7 +239,7 @@ public class KaryawanServices {
     public void hapusKaryawan(String idK) {
         Bson filter = Filters.eq("idKaryawan", idK);
         DAO.delete(filter); // Menggunakan deleteOne [6]
-        DashboardAdmin.showData("");
+        DataKaryawan.showData("");
         JOptionPane.showMessageDialog(null, "Data karyawan berhasil dihapus.");
     }
-}
+}///Fungsi ini digunakan untuk menghapus data karyawan berdasarkan ID karyawan
