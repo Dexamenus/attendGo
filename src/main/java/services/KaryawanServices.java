@@ -4,8 +4,8 @@
  */
 package services;
 
+import Dialog.EditKaryawan;
 import com.mongodb.client.model.Filters;
-import com.mycompany.attendgo.DashboardAdmin;
 import dao.GenericDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -23,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import object.Karyawan;
 import org.bson.conversions.Bson;
+import panel.DataKaryawan;
 
 /**
  *
@@ -90,14 +91,12 @@ public class KaryawanServices {
         // Mengubah layout panel target menjadi BorderLayout
         panelTarget.setLayout(new BorderLayout());
         // Mengatur warna background utama menjadi biru
-        panelTarget.setBackground(new Color(68, 114, 196));
+        panelTarget.setBackground(new Color(242, 242, 242));
 
         // Membuat panel grid khusus untuk menampung kotak/card
-        // Membuat panel grid khusus untuk menampung kotak/card dengan FlowLayout
-        JPanel gridPanel = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 20, 20));
+        JPanel gridPanel = new JPanel(new GridLayout(0, 3, 10, 10));
         gridPanel.setOpaque(false); // Transparan agar warna biru panelTarget terlihat
         gridPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Memberi jarak dari tepi layar
-        // Mengatur panel biru menggunakan FlowLayout (Rata kiri, jarak horizontal 20px, jarak vertikal 20px)
         
 
         // 3. Iterasi data dan menambahkannya ke panel grid
@@ -106,11 +105,11 @@ public class KaryawanServices {
                 // Membuat panel 'Card' (box orange) untuk 1 karyawan
                 // Layout 4 baris 1 kolom agar kolor berisi Nama,ID, Departemen, panel control 
                 JPanel cardPanel = new JPanel(new GridLayout(4, 1, 0, 0));
-                cardPanel.setBackground(new Color(237, 125, 49)); // Warna background orange
+                cardPanel.setBackground(new Color(206, 38, 38)); // Warna background orange
 
                 // Memberikan garis tepi tipis membulat (rounded) dan padding/jarak ke dalam
                 cardPanel.setBorder(BorderFactory.createCompoundBorder(
-                        BorderFactory.createLineBorder(Color.MAGENTA, 1, true),
+                        BorderFactory.createLineBorder(Color.RED, 1, true),
                         BorderFactory.createEmptyBorder(15, 15, 15, 15)
                 ));
 
@@ -128,7 +127,7 @@ public class KaryawanServices {
 
                 // Membuat panel kontrol 1 baris 2 kolom, berisi tombol edit dan hapus
                 JPanel controlPanel = new JPanel(new GridLayout(1, 2, 20, 15));
-                controlPanel.setBackground(new Color(237, 125, 49));
+                controlPanel.setBackground(new Color(206, 38, 38));
 
                 JButton tombolEdit = new JButton("Edit");
                 tombolEdit.setBackground(Color.ORANGE);
@@ -136,16 +135,12 @@ public class KaryawanServices {
                 tombolEdit.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        DashboardAdmin.txtUID.setText(k.getUidRfid());
-                        DashboardAdmin.txtKRID.setText(k.getIdKaryawan());
-                        DashboardAdmin.txtKRID.setEnabled(false);
-                        DashboardAdmin.txtname.setText(k.getNamaLengkap());
-                        DashboardAdmin.txtDept.setSelectedItem(k.getDepartemen());
-                        DashboardAdmin.txtEmail.setText(k.getEmail());
-                        DashboardAdmin.txtPass.setText(k.getPassword());
-                        DashboardAdmin.txtPass.setEnabled(false);
-                        DashboardAdmin.btnUpdate.setEnabled(true);
-                        DashboardAdmin.btnSave.setEnabled(false);
+                        EditKaryawan.txtUID.setText(k.getUidRfid());
+                        EditKaryawan.txtKRID.setText(k.getIdKaryawan());
+                        EditKaryawan.txtKRID.setEnabled(false);
+                        EditKaryawan.txtNama.setText(k.getNamaLengkap());
+                        EditKaryawan.txtDept.setSelectedItem(k.getDepartemen());
+                        EditKaryawan.txtEmail.setText(k.getEmail());
                     }
                 });
                 JButton tombolDelete = new JButton("Delete");
@@ -230,20 +225,18 @@ public class KaryawanServices {
         Karyawan k = DAO.findOne(filter);
         if (k != null) {
             DAO.update(filter, newK);
-            DashboardAdmin.showData("");
+            DataKaryawan.showData("");
             JOptionPane.showMessageDialog(null, "Data berhasil diperbarui!");
         }
     }///Sistem akan mencari data berdasarkan idKaryawan
 
     /**
-     * 5.DELETE: Menghapus data karyawan dari database [5], [6]
-     *
      * @param idK
      */
     public void hapusKaryawan(String idK) {
         Bson filter = Filters.eq("idKaryawan", idK);
         DAO.delete(filter); // Menggunakan deleteOne [6]
-        DashboardAdmin.showData("");
+        DataKaryawan.showData("");
         JOptionPane.showMessageDialog(null, "Data karyawan berhasil dihapus.");
     }
 }///Fungsi ini digunakan untuk menghapus data karyawan berdasarkan ID karyawan

@@ -8,28 +8,21 @@ import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.SwingUtilities;
-import object.Karyawan;
-import static panel.DataKaryawan.showData;
-import services.KaryawanServices;
-import util.EncryptionUtils;
-import util.SecurityUtils;
 
 /**
  *
  * @author ADVAN
  */
-public class ADDKaryawan extends javax.swing.JDialog {
-    public Karyawan Kr;
+public class EditKaryawan extends javax.swing.JDialog {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ADDKaryawan.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditKaryawan.class.getName());
 
     /**
      * Creates new form ADDKaryawan
      */
-    public ADDKaryawan(java.awt.Frame parent, boolean modal) {
+    public EditKaryawan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        showData("");
     }
 
     /**
@@ -85,11 +78,6 @@ public class ADDKaryawan extends javax.swing.JDialog {
         btnSave.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Tambah");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
 
         jButton2.setBackground(new java.awt.Color(255, 0, 0));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -146,11 +134,11 @@ public class ADDKaryawan extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtDept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28))
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,23 +154,6 @@ public class ADDKaryawan extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        if (!txtUID.getText().isEmpty() && !txtKRID.getText().isEmpty() && !txtNama.getText().isEmpty()) {
-            Karyawan K = new Karyawan();
-            K.setUidRfid(SecurityUtils.getHash(txtUID.getText(), SecurityUtils.SHA_256));
-            K.setIdKaryawan(EncryptionUtils.encrypt(txtKRID.getText()));
-            K.setNamaLengkap(txtNama.getText());
-            K.setEmail(txtEmail.getText());
-            K.setDepartemen(txtDept.getSelectedItem().toString());
-            KaryawanServices service = new KaryawanServices();
-            service.tambahKaryawan(K);
-            showData("");
-        } else {
-            //beri info untuk melengkapi kotak isian
-        }
-    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,7 +180,7 @@ public class ADDKaryawan extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ADDKaryawan dialog = new ADDKaryawan(new javax.swing.JFrame(), true);
+                EditKaryawan dialog = new EditKaryawan(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -237,5 +208,4 @@ public class ADDKaryawan extends javax.swing.JDialog {
     public static javax.swing.JTextField txtUID;
     // End of variables declaration//GEN-END:variables
     
-
 }
