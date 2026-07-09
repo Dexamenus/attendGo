@@ -7,9 +7,11 @@ package util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+
+
 /**
  *
- * @author ADVAN
+ * @author mnish
  */
 public class SecurityUtils {
     // Konstanta pilihan algoritma SHA yang tersedia di JCA [3]

@@ -9,8 +9,11 @@ import javax.swing.JPanel;
 import panel.Dashboard;
 import panel.DataKaryawan;
 import panel.DataUser;
+import panel.LogAbsensi;
 import panel.setting;
+import services.DigitalClockService;
 import services.I18nService;
+
 
 /**
  *
@@ -19,12 +22,14 @@ import services.I18nService;
 public class PageAdmin extends javax.swing.JFrame implements I18nService.I18nChangeListener {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PageAdmin.class.getName());
+    Thread clockThread1;
 
     /**
      * Creates new form PageAdmin
      */
 public PageAdmin() {
         initComponents();
+        thread1();
         
         // Daftarkan form ini agar 'mendengarkan' perubahan bahasa
         I18nService.registerListener(this);
@@ -69,6 +74,7 @@ public PageAdmin() {
         jPanel6 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -170,21 +176,28 @@ public PageAdmin() {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel5.setText("Halaman Admin");
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel5)
-                .addContainerGap(831, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 498, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addContainerGap(13, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(42, 42, 42))
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
@@ -243,6 +256,7 @@ public PageAdmin() {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        AddViews(new LogAbsensi());
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -282,6 +296,7 @@ public PageAdmin() {
     public static javax.swing.JButton jButton4;
     public static javax.swing.JButton jButton5;
     public static javax.swing.JButton jButton6;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
@@ -296,5 +311,13 @@ public PageAdmin() {
     jPanel8.revalidate();
     jPanel8.repaint();
 }
+         private void thread1() {
+        DigitalClockService service = new DigitalClockService(jLabel1, "EEEE, d MMMM yyyy, HH:mm:ss");
+        clockThread1 = service.getThread();
+        clockThread1.setName("Thread-Jam-Kiosk2");
+        clockThread1.setDaemon(true);
+        clockThread1.start();
+    }
+
     
 }

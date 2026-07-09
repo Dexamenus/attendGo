@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package util;
 
 import java.security.InvalidKeyException;
@@ -13,23 +9,13 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
-/**
- *
- * @author ADVAN
- */
 public class EncryptionUtils {
     private static final String ALGORITHM = "AES";
     
-    // Kunci rahasia (harus 16 karakter untuk AES-128)
-    // Dalam industri nyata, kunci ini disimpan di environment variable atau KeyVault
-    private static final String KEY = System.getProperty("KEY");
+    // PERBAIKAN: Beri fallback default key jika System.getProperty bernilai null
+    private static final String KEY = System.getProperty("KEY") != null ? System.getProperty("KEY") : "attendGo2026Key1";
     private static final byte[] SECRET_KEY = KEY.getBytes(); 
     
-    /**
-     * Mengubah teks biasa menjadi teks tersandi (Enkripsi).
-     * @param value
-     * @return 
-     */
     public static String encrypt(String value) {
         try {
             SecretKeySpec spec = new SecretKeySpec(SECRET_KEY, ALGORITHM);
@@ -38,19 +24,12 @@ public class EncryptionUtils {
 
             byte[] encryptedBytes = cipher.doFinal(value.getBytes());
             return Base64.getEncoder().encodeToString(encryptedBytes);
-        } catch (InvalidKeyException | NoSuchAlgorithmException | 
-                BadPaddingException | IllegalBlockSizeException | 
-                NoSuchPaddingException e) {
+        } catch (Exception e) {
             System.err.println("Error saat enkripsi: " + e.getMessage());
             return null;
         }
     }
 
-    /**
-     * Mengubah teks tersandi kembali ke teks asli (Dekripsi).
-     * @param encryptedValue
-     * @return 
-     */
     public static String decrypt(String encryptedValue) {
         try {
             SecretKeySpec spec = new SecretKeySpec(SECRET_KEY, ALGORITHM);
@@ -60,11 +39,9 @@ public class EncryptionUtils {
             byte[] decodedBytes = Base64.getDecoder().decode(encryptedValue);
             byte[] decryptedBytes = cipher.doFinal(decodedBytes);
             return new String(decryptedBytes);
-        } catch (InvalidKeyException | NoSuchAlgorithmException | BadPaddingException |
-                IllegalBlockSizeException | NoSuchPaddingException e) {
+        } catch (Exception e) {
             System.err.println("Error saat dekripsi: " + e.getMessage());
             return null;
         }
     }
-    
 }
