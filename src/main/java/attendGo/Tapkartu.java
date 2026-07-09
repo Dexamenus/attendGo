@@ -4,8 +4,8 @@
  */
 package attendGo;
 
-import com.ituhn.pemkom2.services.DigitalClockService;
-import javax.swing.JLabel;
+//import com.ituhn.pemkom2.services.DigitalClockService;
+//import javax.swing.JLabel;
 
 /**
  *
@@ -21,7 +21,7 @@ public class Tapkartu extends javax.swing.JFrame {
      */
     public Tapkartu() {
         initComponents();
-        initClock(jLabel2);
+//        initClock(jLabel2);
     }
 
     /**
@@ -164,15 +164,15 @@ public class Tapkartu extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    private void initClock(JLabel lblJam) {
-        // Murni menggunakan string format jam digital biasa (Jam:Menit:Detik)
-        String formatJam = "HH:mm:ss"; 
-        
-        DigitalClockService service = new DigitalClockService(lblJam, formatJam);
-        clockThread = service.getThread();
-        clockThread.setName("Thread-Jam-TapKartu");
-        clockThread.setDaemon(true);
-        clockThread.start();
-    }
+//    private void initClock(JLabel lblJam) {
+//        // Murni menggunakan string format jam digital biasa (Jam:Menit:Detik)
+//        String formatJam = "HH:mm:ss"; 
+//        
+//        DigitalClockService service = new DigitalClockService(lblJam, formatJam);
+//        clockThread = service.getThread();
+//        clockThread.setName("Thread-Jam-TapKartu");
+//        clockThread.setDaemon(true);
+//        clockThread.start();
+//    }
 }
 
